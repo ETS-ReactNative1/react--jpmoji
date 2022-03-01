@@ -36,7 +36,7 @@ const NavBar = () => {
             <span className="whitespace-nowrap text-lg font-semibold dark:text-white">
               katakana
             </span>
-            <div className="md:-mr-20">
+            {/* <div className="md:-mr-20">
               {
                 <>
                   <span className="text-sm text-gray-400">ー Welcome</span>{' '}
@@ -45,7 +45,7 @@ const NavBar = () => {
                   </span>
                 </>
               }
-            </div>
+            </div> */}
           </div>
         </Link>
         <div className="md:order-2">
