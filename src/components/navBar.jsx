@@ -41,7 +41,7 @@ const NavBar = () => {
                 <>
                   <span className="text-sm text-gray-400">ー Welcome</span>{' '}
                   <span className="rounded-full bg-green-200 p-2 text-sm text-green-500">
-                    {' '}
+                    hpn{' '}
                   </span>
                 </>
               }
