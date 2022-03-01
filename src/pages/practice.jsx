@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import Select from 'react-select';
+import _ from 'lodash';
+import playAudio from '../utils/playAudio';
 
 const practiceOptions = [
   { value: 'all', label: 'All Characters' },
@@ -30,7 +33,24 @@ const customStyles = {
 const Practice = () => {
   const [practiceType, setPracticeType] = useState('');
   const [practiceTypeText, setPracticeTypeText] = useState('');
+  const [delay, setDelay] = useState(3);
   const [delayText, setDelayText] = useState('');
+  const [shuffledItems, setShuffledItems] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (practiceType === 'all') {
+      let range = _.range(1, 47);
+      range = _.without(range, 37, 39, 47, 48, 49);
+      const shuffledRange = _.shuffle(range);
+      setShuffledItems(shuffledRange);
+
+      shuffledRange.forEach((name, index) =>
+        setTimeout(() => playAudio(name), delay * index * 1000)
+      );
+    }
+  };
 
   const handlePracticeOptionChange = (selected) => {
     const a = selected.value;
@@ -45,6 +65,7 @@ const Practice = () => {
   };
 
   const handleDelayChange = (selected) => {
+    setDelay(selected.value);
     setDelayText(
       'Next character will come after ' + selected.value + ' seconds.'
     );
@@ -54,24 +75,49 @@ const Practice = () => {
 
   return (
     <div className="container mx-auto mb-10">
-      <div className="flex justify-center">
-        <button
-          className="block text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
-          type="button"
-          data-modal-toggle="authentication-modal">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 inline"
-            viewBox="0 0 20 20"
-            fill="currentColor">
-            <path
-              fillRule="evenodd"
-              d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-              clipRule="evenodd"
-            />
-          </svg>{' '}
-          Define Practice Setting
-        </button>
+      <div className="text-center">
+        <div className="block">
+          <button
+            className="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+            type="button"
+            data-modal-toggle="authentication-modal">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 inline"
+              viewBox="0 0 20 20"
+              fill="currentColor">
+              <path
+                fillRule="evenodd"
+                d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                clipRule="evenodd"
+              />
+            </svg>{' '}
+            Define Practice Setting
+          </button>
+        </div>
+
+        <div className="w-full mt-3" style={{ zIndex: 99 }}>
+          {shuffledItems &&
+            shuffledItems.map((item, index) => {
+              return (
+                <React.Fragment key={item}>
+                  <figure
+                    onClick={() => handleCharacterClick(item)}
+                    title="Click to listen"
+                    className="inline-block border p-2 w-12 lg:w-14 cursor-pointer">
+                    <img
+                      alt={item}
+                      src={require(`../../public/data/characters/imgs/${item}.png`)}
+                    />
+                    <figcaption className="text-gray-400 text-xs">
+                      {index + 1}
+                    </figcaption>
+                  </figure>
+                  {(index + 1) % 5 === 0 && <br />}
+                </React.Fragment>
+              );
+            })}
+        </div>
       </div>
 
       <div
@@ -98,6 +144,7 @@ const Practice = () => {
               </button>
             </div>
             <form
+              onSubmit={handleSubmit}
               className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
               action="#">
               <h3 className="text-xl font-medium text-gray-900 dark:text-white">
@@ -105,7 +152,7 @@ const Practice = () => {
               </h3>
               <div>
                 <label
-                  htmlFor="email"
+                  htmlFor="practice"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                   Specify type of practice
                 </label>
@@ -116,6 +163,7 @@ const Practice = () => {
                   hideSelectedOptions={true}
                   isSearchable={false}
                   isClearable={false}
+                  required={true}
                 />
                 <small className="text-green-500">{practiceTypeText}</small>
               </div>
@@ -157,7 +205,7 @@ const Practice = () => {
               )}
               <div>
                 <label
-                  htmlFor="password"
+                  htmlFor="delay"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                   Specify Delay (in seconds)
                 </label>
@@ -168,6 +216,7 @@ const Practice = () => {
                   hideSelectedOptions={true}
                   isSearchable={false}
                   isClearable={false}
+                  required={true}
                 />
                 <small className="text-green-500">{delayText}</small>
               </div>
