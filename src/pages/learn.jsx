@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
 import skipCharacter from '../assets/skip-character.png';
+import playAudio from '../utils/playAudio';
 
 const Learn = () => {
   const [gifNumber, setGifNumber] = useState(1);
+
+  const handleCharacterClick = (item) => {
+    playAudio(item);
+    showGif(item);
+  };
+
+  const showGif = (item) => setGifNumber(item);
 
   return (
     <div className="container mx-auto mb-10">
@@ -36,7 +44,7 @@ const Learn = () => {
                   <img
                     alt={item}
                     src={require(`../../public/data/characters/imgs/${item}.png`)}
-                    onClick={() => setGifNumber(item)}
+                    onClick={() => handleCharacterClick(item)}
                     title="Click to listen"
                     className="inline-block border p-1 w-12 lg:w-12 cursor-pointer"
                   />
