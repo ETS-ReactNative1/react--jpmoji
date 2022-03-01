@@ -9,20 +9,29 @@ const NavBar = () => {
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         <Link to="/" className="flex">
           <svg
-            className="mr-3 h-10"
-            viewBox="0 0 52 72"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M1.87695 53H28.7791C41.5357 53 51.877 42.7025 51.877 30H24.9748C12.2182 30 1.87695 40.2975 1.87695 53Z"
-              fill="#76A9FA"></path>
-            <path
-              d="M0.000409561 32.1646L0.000409561 66.4111C12.8618 66.4111 23.2881 55.9849 23.2881 43.1235L23.2881 8.87689C10.9966 8.98066 1.39567 19.5573 0.000409561 32.1646Z"
-              fill="#A4CAFE"></path>
-            <path
-              d="M50.877 5H23.9748C11.2182 5 0.876953 15.2975 0.876953 28H27.7791C40.5357 28 50.877 17.7025 50.877 5Z"
-              fill="#1C64F2"></path>
+            version="1.0"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30pt"
+            height="30pt"
+            className="mr-1 h-10"
+            viewBox="0 0 120 120"
+            preserveAspectRatio="xMidYMid meet">
+            <g
+              transform="translate(0.000000,120.000000) scale(0.100000,-0.100000)"
+              fill="#000000"
+              stroke="none">
+              <path
+                d="M955 1021 c-6 -6 -161 -35 -345 -66 -319 -54 -393 -61 -442 -40 -30
+12 -21 -21 14 -50 50 -42 72 -47 135 -29 31 9 184 42 340 74 231 47 285 55
+290 44 3 -8 -19 -40 -52 -77 -57 -61 -191 -187 -200 -187 -3 0 -24 14 -47 30
+-22 17 -49 30 -60 30 -17 0 -18 -1 -2 -25 23 -36 20 -86 -11 -185 -37 -115
+-88 -218 -157 -314 -31 -44 -55 -82 -52 -85 10 -10 108 97 159 174 60 91 94
+156 140 267 31 75 34 78 116 134 95 65 160 116 236 186 28 26 57 48 62 48 28
+0 7 33 -31 49 -66 28 -83 32 -93 22z"
+              />
+            </g>
           </svg>
+
           <div className="flex flex-col">
             <span className="whitespace-nowrap text-lg font-semibold dark:text-white">
               katakana
