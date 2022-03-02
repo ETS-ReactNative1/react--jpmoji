@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
+import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
 import Favorite from '../components/favorite';
 import { playAudio } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
 
 const Learn = () => {
+  useTitle('Hiragana | Learn');
   const { t } = useTranslation();
   const [gifNumber, setGifNumber] = useState(1);
   const [favorite, setIsFavorite] = useState(false);

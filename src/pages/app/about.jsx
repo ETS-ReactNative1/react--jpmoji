@@ -1,7 +1,9 @@
 import React from 'react';
+import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
 
 const About = () => {
+  useTitle('Hiragana | About');
   const { t } = useTranslation();
 
   return (

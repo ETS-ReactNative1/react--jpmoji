@@ -1,9 +1,11 @@
 import React from 'react';
+import { useTitle } from 'react-use';
 import notFound from '../../assets/icons/notFound.png';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const NotFound = () => {
+  useTitle('Hiragana | Oops');
   const { t } = useTranslation();
   return (
     <div className="flex h-screen flex-col items-center justify-center">

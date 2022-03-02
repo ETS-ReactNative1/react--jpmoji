@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
 import NavBar from './components/navBar';
 import Learn from './pages/learn';
-import PracticeNew from './pages/practiceNew';
+import Practice from './pages/practice';
 import NotFound from './pages/app/notFound';
 import './App.css';
 import About from './pages/app/about';
@@ -37,7 +37,7 @@ const App = () => {
         )}
       <Routes>
         <Route path="/learn" element={<Learn />} />
-        <Route path="/practice" element={<PracticeNew />} />
+        <Route path="/practice" element={<Practice />} />
         <Route path="/about" element={<About />} />
         <Route path="/not-found" element={<NotFound />} />
         <Route path="/" exact element={<Navigate to="/learn" />} />

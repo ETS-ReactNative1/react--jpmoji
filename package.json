@@ -1,5 +1,5 @@
 {
-  "name": "react-katakana",
+  "name": "react-hiragana",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,7 +15,8 @@
     "react-i18next": "^11.15.5",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
-    "react-select": "^5.2.2"
+    "react-select": "^5.2.2",
+    "react-use": "^17.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
