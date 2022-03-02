@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { Scrollbars } from 'react-custom-scrollbars-2';
+import Cookies from 'js-cookie';
 import { playAudioWave } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
 import CustomRadioButton from '../components/customRadioButton';
@@ -31,6 +31,24 @@ const PracticeNew = () => {
 
     setModalVisibility(false);
     setAudioWaveVisibility(true);
+    savePracticePatternToCookie();
+  };
+
+  const savePracticePatternToCookie = () => {
+    Cookies.set('practiceType', practiceType);
+    Cookies.set('delay', delay);
+
+    if (practiceType === 'range') Cookies.set('range', JSON.stringify(range));
+  };
+
+  const getPracticePatternFromCookie = () => {
+    let _practiceType = Cookies.get('practiceType');
+    let _delay = Cookies.get('delay');
+    let _range = JSON.parse(Cookies.get('range'));
+
+    if (_practiceType) setPracticeType(_practiceType);
+    if (_delay) setDelay(parseInt(_delay));
+    if (_range.length > 0) setRange(_range);
   };
 
   const shaffleAndPlay = (arr) => {
@@ -75,6 +93,7 @@ const PracticeNew = () => {
 
   useEffect(() => {
     setRange(_.range(from, to + 1));
+    getPracticePatternFromCookie();
   }, []);
 
   return (
