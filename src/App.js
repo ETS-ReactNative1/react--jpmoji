@@ -1,22 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Navigate, Routes, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Cookies from 'js-cookie';
 import NavBar from './components/navBar';
 import Learn from './pages/learn';
-import Practice from './pages/practice';
 import PracticeNew from './pages/practiceNew';
-import Favorites from './pages/favorites';
 import NotFound from './pages/app/notFound';
 import './App.css';
 import About from './pages/app/about';
 
 const App = () => {
+  const { i18n } = useTranslation();
   const { pathname } = useLocation();
+
+  const setLanguage = (lang) => i18n.changeLanguage(lang);
+
+  const getLangCookie = () => Cookies.get('site-lang');
+
+  const changeLanguage = (e) => {
+    const lang = e.target.value;
+    Cookies.set('site-lang', lang);
+    setLanguage(lang);
+  };
+
+  useEffect(() => {
+    // lang
+    setLanguage(getLangCookie());
+  }, []);
 
   return (
     <>
       {pathname === '/login' ||
         pathname === '/register' ||
-        pathname === '/not-found' || <NavBar />}
+        pathname === '/not-found' || (
+          <NavBar langChange={changeLanguage} currentLang={getLangCookie()} />
+        )}
       <Routes>
         <Route path="/learn" element={<Learn />} />
         <Route path="/practice" element={<PracticeNew />} />

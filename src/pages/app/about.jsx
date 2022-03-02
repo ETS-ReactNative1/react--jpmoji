@@ -1,27 +1,22 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const About = () => {
+  const { t } = useTranslation();
+
   return (
-    <div className="container mx-auto px-10 mt-5 mb-10">
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores
-        necessitatibus quos, sunt ipsa ea temporibus quod quia unde, distinctio
-        aspernatur sequi? Odit, rem est vero quidem magni illo illum! Vel. Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Ipsa minima dolor
-        possimus eius earum ad. Rem cupiditate aspernatur tempore excepturi
-        aliquid consectetur odit ex, hic maiores. Exercitationem ratione
-        provident laudantium!
-      </p>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores
-        necessitatibus quos, sunt ipsa ea temporibus quod quia unde, distinctio
-        aspernatur sequi? Odit, rem est vero quidem magni illo illum! Vel.
-      </p>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores
-        necessitatibus quos, sunt ipsa ea temporibus quod quia unde, distinctio
-        aspernatur sequi? Odit, rem est vero quidem magni illo illum! Vel.
-      </p>
+    <div className="container mx-auto flex justify-center px-10 mt-5 mb-10">
+      <div className="block p-6 max-w-xl bg-white rounded-lg border border-gray-200 shadow-xl hover:shadow-none dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Katakana (V.2.0.0)
+        </h5>
+        <a
+          href="https://hpn-katakana.netlify.app"
+          className="font-medium text-gray-500 block">
+          See Version 1 @ https://hpn-katakana.netlify.app
+        </a>
+        <p className="mt-5">{t('about.text')}</p>
+      </div>
     </div>
   );
 };

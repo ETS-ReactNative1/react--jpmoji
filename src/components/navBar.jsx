@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-const NavBar = () => {
+const langs = [
+  { value: 'en', label: 'En' },
+  { value: 'mm', label: 'Mm' },
+  { value: 'jp', label: 'Jp' },
+];
+
+const customStyles = {
+  menu: (provided, state) => ({
+    ...provided,
+    width: state.selectProps.width,
+    color: state.selectProps.menuColor,
+    padding: 10,
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    padding: 10,
+    borderRadius: 7,
+  }),
+};
+
+const NavBar = ({ currentLang: lang, langChange }) => {
+  const { t } = useTranslation();
+  const [currentLang, setCurrentLang] = useState('en-US');
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    // seting language in select box
+    // setCurrentLang(lang);
+    if (lang === 'ja-JP') setCurrentLang('ja-JP');
+    else if (lang === 'my-MM') setCurrentLang('my-MM');
+    else setCurrentLang('en-US');
+  }, [lang]);
 
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
@@ -37,7 +68,9 @@ const NavBar = () => {
               katakana
             </span>
             <div className="md:-mr-20">
-              <span className="text-sm text-gray-400">ー Welcome</span>{' '}
+              <span className="text-sm text-gray-400">
+                ー {t('learn.nav.welcome')}
+              </span>{' '}
               <span className="rounded-full bg-indigo-200 p-2 text-sm text-indigo-500">
                 student
               </span>
@@ -79,7 +112,7 @@ const NavBar = () => {
                 to="/learn"
                 className="block rounded py-2 px-3 md:rounded-3xl"
                 aria-current="page">
-                Learn{' '}
+                {t('learn.nav.learn')}{' '}
                 {pathname === '/learn' && (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +128,7 @@ const NavBar = () => {
               <NavLink
                 to="/practice"
                 className="block rounded py-2 px-3 md:rounded-3xl">
-                Practice{' '}
+                {t('learn.nav.practice')}{' '}
                 {pathname === '/practice' && (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +144,7 @@ const NavBar = () => {
               <NavLink
                 to="/about"
                 className="block rounded py-2 px-3 md:rounded-3xl">
-                About{' '}
+                {t('learn.nav.about')}{' '}
                 {pathname === '/about' && (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -128,11 +161,21 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li>
-              <select className="mr-2 rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-indigo-500 dark:focus:ring-indigo-500">
+              <select
+                onChange={langChange}
+                className="mr-2 rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-indigo-500 dark:focus:ring-indigo-500">
                 <option value="en-US">English</option>
                 <option value="ja-JP">日本語</option>
                 <option value="my-MM">မြန်မာ</option>
               </select>
+              {/* <Select
+                options={langs}
+                styles={customStyles}
+                hideSelectedOptions={true}
+                isSearchable={false}
+                isClearable={false}
+                required={true}
+              /> */}
             </li>
           </ul>
         </div>

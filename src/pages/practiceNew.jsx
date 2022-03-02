@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
 import { playAudioWave } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
 import CustomRadioButton from '../components/customRadioButton';
 
 const PracticeNew = () => {
+  const { t } = useTranslation();
   const [modalVisibility, setModalVisibility] = useState(false);
   const [audioWaveVisibility, setAudioWaveVisibility] = useState(false);
   const [practiceType, setPracticeType] = useState('all');
@@ -115,7 +117,7 @@ const PracticeNew = () => {
                 clipRule="evenodd"
               />
             </svg>{' '}
-            Define Practice Setting
+            {t('practice.setupButton')}
           </button>
 
           <div className={`outer mt-5 ${audioWaveVisibility ? '' : 'hidden'}`}>
@@ -169,7 +171,7 @@ const PracticeNew = () => {
                 onSubmit={handleSubmit}
                 className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                  Set up practice settings{' '}
+                  {t('practice.modal.title')}{' '}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 inline"
@@ -186,27 +188,27 @@ const PracticeNew = () => {
                   <label
                     htmlFor="practice"
                     className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Specify type of practice
+                    {t('practice.modal.typeOfPractice')}
                   </label>
                   <div className="flex flex-row justify-start gap-2">
                     <CustomRadioButton
                       value="all"
                       selected={practiceType}
-                      label="All"
+                      label={t('practice.modal.all')}
                       description="46 chars"
                       onClick={handlePracticeTypeSelect}
                     />
                     <CustomRadioButton
                       value="favorites"
                       selected={practiceType}
-                      label="Favorites"
+                      label={t('practice.modal.favorites')}
                       description={`${getFavorites().length} chars`}
                       onClick={handlePracticeTypeSelect}
                     />
                     <CustomRadioButton
                       value="range"
                       selected={practiceType}
-                      label="Range"
+                      label={t('practice.modal.range')}
                       description="Select range"
                       onClick={handlePracticeTypeSelect}
                     />
@@ -252,7 +254,7 @@ const PracticeNew = () => {
                   <label
                     htmlFor="delay"
                     className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    Specify Delay (in seconds)
+                    {t('practice.modal.delay')}
                   </label>
                   <div className="flex flex-row justify-start gap-2">
                     <CustomRadioButton
@@ -277,8 +279,8 @@ const PracticeNew = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full text-white bg-indigo-600 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">
-                  Start{' '}
+                  className="w-full font-bold text-white bg-indigo-600 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">
+                  {t('practice.modal.startButton')}{' '}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 inline"

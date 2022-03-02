@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 import Favorite from '../components/favorite';
 import { playAudio } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
 
 const Learn = () => {
+  const { t } = useTranslation();
   const [gifNumber, setGifNumber] = useState(1);
   const [favorite, setIsFavorite] = useState(false);
 
@@ -58,7 +60,7 @@ const Learn = () => {
       <div className="flex flex-col md:flex-row justify-center">
         <div className="order-2 md:order-1 text-center mr-3">
           <span className="text-gray-600 text-xs leading-none">
-            Click the character to learn, and make sure speaker is on.
+            {t('learn.body.desc')}
           </span>
           <div className="relative w-full mt-1">
             {_.range(1, 52).map((item, index) => {
@@ -107,7 +109,9 @@ const Learn = () => {
             )}
           </div>
           <Favorite
-            label={favorite ? 'Favorited' : 'Favorite ?'}
+            label={
+              favorite ? t('learn.body.favorited') : t('learn.body.favorite')
+            }
             checked={favorite}
             onChange={handleFavorite}
           />

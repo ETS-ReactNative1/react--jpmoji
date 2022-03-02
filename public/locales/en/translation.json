@@ -1,0 +1,34 @@
+{
+  "learn": {
+    "nav": {
+      "welcome": "Welcome",
+      "learn": "Learn",
+      "practice": "Practice",
+      "about": "About"
+    },
+    "body": {
+      "desc": "Click the character to learn, and make sure speaker is on.",
+      "favorite": "Favorite ？",
+      "favorited": "Favorited"
+    }
+  },
+  "practice": {
+    "setupButton": "Define Practice Setting",
+    "modal": {
+      "title": "Set up practice settings",
+      "typeOfPractice": "Specify type of practice",
+      "all": "All",
+      "favorites": "Favorites",
+      "range": "range",
+      "delay": "Specify Delay (in seconds)",
+      "startButton": "Start"
+    }
+  },
+  "about": {
+    "text": "This app is developed with the aim of helping students who are learning Japanese Language and find difficult in remembering characters. You can learn how a character is correctly drawn and how it is pronounced on `Learn` page, able to mark characters difficult, and can practice those characters randomly in `Practice` Page. Choose a practice type, set delay and write down what you hear and then check if they are correct when the audio has finished."
+  },
+  "notFound": {
+    "text": "Our apologies, but we couldn't find that page. Is it possible that you found a bad link?",
+    "button": "Back to Home"
+  }
+}
