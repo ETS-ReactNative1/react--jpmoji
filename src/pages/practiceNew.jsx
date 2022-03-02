@@ -25,7 +25,9 @@ const PracticeNew = () => {
     if (practiceType === 'all')
       shaffleAndPlay(_.without(_.range(1, 47), 37, 39, 47, 48, 49));
     else if (practiceType === 'favorites') shaffleAndPlay(getFavorites());
-    else if (practiceType === 'range') shaffleAndPlay(range);
+    else if (practiceType === 'range') {
+      shaffleAndPlay(_.without(range, 37, 39, 47, 48, 49));
+    }
 
     setModalVisibility(false);
     setAudioWaveVisibility(true);
@@ -146,8 +148,7 @@ const PracticeNew = () => {
               </div>
               <form
                 onSubmit={handleSubmit}
-                className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
-                action="#">
+                className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
                   Set up practice settings{' '}
                   <svg
@@ -162,7 +163,7 @@ const PracticeNew = () => {
                     />
                   </svg>
                 </h3>
-                <div>
+                <div className="ml-2">
                   <label
                     htmlFor="practice"
                     className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -173,14 +174,14 @@ const PracticeNew = () => {
                       value="all"
                       selected={practiceType}
                       label="All"
-                      description="46 chars in total"
+                      description="46 chars"
                       onClick={handlePracticeTypeSelect}
                     />
                     <CustomRadioButton
                       value="favorites"
                       selected={practiceType}
                       label="Favorites"
-                      description={`${getFavorites().length} chars in total`}
+                      description={`${getFavorites().length} chars`}
                       onClick={handlePracticeTypeSelect}
                     />
                     <CustomRadioButton
@@ -193,54 +194,45 @@ const PracticeNew = () => {
                   </div>
                 </div>
                 {practiceType === 'range' && (
-                  <Scrollbars
-                    autoHeight
-                    autoHeightMax={400}
-                    autoHide
-                    autoHideTimeout={1000}>
-                    <div>
-                      <div className="relative w-full text-center">
-                        {_.range(1, 52).map((item, index) => {
-                          if (
-                            item === 37 ||
-                            item === 39 ||
-                            item === 47 ||
-                            item === 48 ||
-                            item === 49
-                          ) {
-                            return (
-                              <img
-                                alt={item}
-                                key={item}
-                                src={skipCharacter}
-                                className="border-2 m-0.5 rounded-lg border-white-200 inline-block p-1 w-6 lg:w-9"
-                              />
-                            );
-                          }
-
+                  <div>
+                    <div className="relative w-full text-center">
+                      {_.range(1, 52).map((item, index) => {
+                        if (
+                          item === 37 ||
+                          item === 39 ||
+                          item === 47 ||
+                          item === 48 ||
+                          item === 49
+                        ) {
                           return (
-                            <React.Fragment key={item}>
-                              <img
-                                alt={item}
-                                src={require(`../../public/data/characters/imgs/${item}.png`)}
-                                onClick={() => handleCharacterClick(item)}
-                                title="Click to listen"
-                                className={`border-2 m-0.5 rounded-lg border-indigo-200 inline-block p-1 w-7 lg:w-9 cursor-pointer ${
-                                  _.includes(range, item) && 'bg-indigo-200'
-                                }`}
-                              />
-                              {/* {(index + 1) % 5 === 0 && <br />} */}
-                            </React.Fragment>
+                            <img
+                              alt={item}
+                              key={item}
+                              src={skipCharacter}
+                              className="hidden border-2 m-0.5 rounded-lg border-white-200 p-1 w-6 lg:w-9"
+                            />
                           );
-                        })}
-                      </div>
+                        }
+
+                        return (
+                          <img
+                            key={item}
+                            alt={item}
+                            src={require(`../../public/data/characters/imgs/${item}.png`)}
+                            onClick={() => handleCharacterClick(item)}
+                            className={`border-2 m-0.5 rounded-lg border-indigo-200 inline-block p-1 w-7 lg:w-9 cursor-pointer ${
+                              _.includes(range, item) && 'bg-indigo-200'
+                            }`}
+                          />
+                        );
+                      })}
                     </div>
-                  </Scrollbars>
+                  </div>
                 )}
-                <div>
+                <div className="ml-2">
                   <label
                     htmlFor="delay"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">
                     Specify Delay (in seconds)
                   </label>
                   <div className="flex flex-row justify-start gap-2">
