@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 import _ from 'lodash';
-import playAudio from '../utils/playAudio';
+import { playAudio } from '../utils/playAudio';
 
 const practiceOptions = [
   { value: 'all', label: 'All Characters' },

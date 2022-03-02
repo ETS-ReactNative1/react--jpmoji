@@ -1,58 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Select from 'react-select';
 import _ from 'lodash';
 import { Scrollbars } from 'react-custom-scrollbars-2';
-import playAudio from '../utils/playAudio';
+import { playAudioWave } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
 import CustomRadioButton from '../components/customRadioButton';
 
 const PracticeNew = () => {
-  //   const [practiceType, setPracticeType] = useState('');
-  //   const [practiceTypeText, setPracticeTypeText] = useState('');
-  //   const [delay, setDelay] = useState(3);
-  //   const [delayText, setDelayText] = useState('');
-  const [shuffledItems, setShuffledItems] = useState([]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (practiceType === 'all') {
-      let allCharacters = _.range(1, 47);
-      let characters = _.without(allCharacters, 37, 39, 47, 48, 49);
-      const shuffledRange = _.shuffle(characters);
-      setShuffledItems(shuffledRange);
-
-      shuffledRange.forEach((name, index) =>
-        setTimeout(() => playAudio(name), delay * index * 1000)
-      );
-    }
-
-    setModalVisibility(false);
-  };
-
-  //   const handlePracticeOptionChange = (selected) => {
-  //     const a = selected.value;
-  //     if (a === 'all') {
-  //       setPracticeTypeText('46 characters chars');
-  //     } else if (a === 'favorites') {
-  //       setPracticeTypeText(getFavorites().length + ' characters chars');
-  //     } else {
-  //       setPracticeTypeText('');
-  //     }
-  //     setPracticeType(a);
-  //   };
-
-  //   const handleDelayChange = (selected) => {
-  //     setDelay(selected.value);
-  //     setDelayText(
-  //       'Next character will come after ' + selected.value + ' seconds.'
-  //     );
-  //   };
-
-  const getFavorites = () => JSON.parse(localStorage.getItem('favorites'));
-
   const [modalVisibility, setModalVisibility] = useState(false);
+  const [audioWaveVisibility, setAudioWaveVisibility] = useState(false);
   const [practiceType, setPracticeType] = useState('all');
   const [delay, setDelay] = useState(3);
   const [from, setFrom] = useState(1);
@@ -60,8 +15,35 @@ const PracticeNew = () => {
   const [isFromSelected, setIsFromSelected] = useState(true);
   const [isToSelected, setIsToSelected] = useState(true);
   const [range, setRange] = useState([]);
+  const [shuffledItems, setShuffledItems] = useState([]);
+
+  const getFavorites = () => JSON.parse(localStorage.getItem('favorites'));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (practiceType === 'all')
+      shaffleAndPlay(_.without(_.range(1, 47), 37, 39, 47, 48, 49));
+    else if (practiceType === 'favorites') shaffleAndPlay(getFavorites());
+    else if (practiceType === 'range') shaffleAndPlay(range);
+
+    setModalVisibility(false);
+    setAudioWaveVisibility(true);
+  };
+
+  const shaffleAndPlay = (arr) => {
+    const shuffled = _.shuffle(arr);
+    setShuffledItems(shuffled);
+
+    shuffled.forEach((name, index) =>
+      setTimeout(() => {
+        playAudioWave(name);
+      }, delay * index * 1000)
+    );
+  };
 
   const handlePracticeTypeSelect = (value) => setPracticeType(value);
+
   const handleDelaySelect = (value) => setDelay(value);
 
   const handleCharacterClick = (item) => {
@@ -84,17 +66,13 @@ const PracticeNew = () => {
     }
   };
 
-  const handleModal = () => {
+  const handleModal = () =>
     modalVisibility ? setModalVisibility(false) : setModalVisibility(true);
-  };
 
-  const handleModalClose = () => {
-    setModalVisibility(false);
-  };
+  const handleModalClose = () => setModalVisibility(false);
 
   useEffect(() => {
     setRange(_.range(from, to + 1));
-    console.log(range);
   }, []);
 
   return (
@@ -118,6 +96,13 @@ const PracticeNew = () => {
             </svg>{' '}
             Define Practice Setting
           </button>
+
+          <div className={`outer mt-5 ${audioWaveVisibility ? '' : 'hidden'}`}>
+            <label className="text-xs">Audio...</label>
+            <div
+              id="waveform"
+              className="max-w-sm border-2 h-6 rounded-full inner"></div>
+          </div>
         </div>
 
         <div className="w-full mt-3" style={{ zIndex: 99 }}>
@@ -139,11 +124,9 @@ const PracticeNew = () => {
       </div>
 
       <div className={`${modalVisibility ? '' : 'hidden'}`}>
-        <div
-          aria-hidden="true"
-          className={`fixed right-0 left-0 top-0 bottom-0 z-50 mx-auto flex h-full items-center justify-center overflow-y-auto overflow-x-hidden  shadow-2xl backdrop-blur-sm backdrop-contrast-50 md:inset-0 `}>
-          <div className="relative px-2 w-full max-w-md h-full md:h-auto">
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div className="fixed right-0 left-0 top-0 bottom-0 z-50 mx-auto flex h-full items-center justify-center overflow-y-auto overflow-x-hidden  shadow-2xl backdrop-blur-sm backdrop-contrast-50 md:inset-0">
+          <div className="relative w-full h-auto max-w-lg px-4">
+            <div className="relative rounded-lg bg-white shadow dark:bg-gray-700">
               <div className="flex justify-end p-2">
                 <button
                   onClick={handleModalClose}
@@ -190,14 +173,14 @@ const PracticeNew = () => {
                       value="all"
                       selected={practiceType}
                       label="All"
-                      description="46 chars"
+                      description="46 chars in total"
                       onClick={handlePracticeTypeSelect}
                     />
                     <CustomRadioButton
                       value="favorites"
                       selected={practiceType}
                       label="Favorites"
-                      description={`${getFavorites().length} chars`}
+                      description={`${getFavorites().length} chars in total`}
                       onClick={handlePracticeTypeSelect}
                     />
                     <CustomRadioButton
@@ -230,7 +213,7 @@ const PracticeNew = () => {
                                 alt={item}
                                 key={item}
                                 src={skipCharacter}
-                                className="border-2 m-0.5 rounded-lg border-white-200 inline-block p-1 w-6 lg:w-8"
+                                className="border-2 m-0.5 rounded-lg border-white-200 inline-block p-1 w-6 lg:w-9"
                               />
                             );
                           }
@@ -242,11 +225,11 @@ const PracticeNew = () => {
                                 src={require(`../../public/data/characters/imgs/${item}.png`)}
                                 onClick={() => handleCharacterClick(item)}
                                 title="Click to listen"
-                                className={`border-2 m-0.5 rounded-lg border-indigo-200 inline-block p-1 w-6 lg:w-8 cursor-pointer ${
+                                className={`border-2 m-0.5 rounded-lg border-indigo-200 inline-block p-1 w-7 lg:w-9 cursor-pointer ${
                                   _.includes(range, item) && 'bg-indigo-200'
                                 }`}
                               />
-                              {(index + 1) % 5 === 0 && <br />}
+                              {/* {(index + 1) % 5 === 0 && <br />} */}
                             </React.Fragment>
                           );
                         })}

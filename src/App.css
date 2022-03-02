@@ -13,3 +13,15 @@
     display: block;
   }
 }
+
+.outer {
+  display: flex;
+  /*center For  vertically*/
+  justify-content: center;
+  flex-direction: column;
+  /*center for horizontally*/
+  align-items: center;
+}
+.inner {
+  width: 80%;
+}

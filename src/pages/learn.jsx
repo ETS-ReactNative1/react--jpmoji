@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import Favorite from '../components/favorite';
+import { playAudio } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
-import playAudio from '../utils/playAudio';
 
 const Learn = () => {
   const [gifNumber, setGifNumber] = useState(1);
