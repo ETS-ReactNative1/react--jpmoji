@@ -48,11 +48,12 @@ const Practice = () => {
   const getPracticePatternFromCookie = () => {
     let _practiceType = Cookies.get('practiceType');
     let _delay = Cookies.get('delay');
-    let _range = JSON.parse(Cookies.get('range'));
+    let _range = Cookies.get('range');
+    if (_range) _range = JSON.parse(_range);
 
     if (_practiceType) setPracticeType(_practiceType);
     if (_delay) setDelay(parseInt(_delay));
-    if (_range.length > 0) setRange(_range);
+    if (_range) setRange(_range);
   };
 
   const shaffleAndPlay = (arr) => {
