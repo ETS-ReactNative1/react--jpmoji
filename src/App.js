@@ -7,6 +7,7 @@ import PracticeNew from './pages/practiceNew';
 import Favorites from './pages/favorites';
 import NotFound from './pages/app/notFound';
 import './App.css';
+import About from './pages/app/about';
 
 const App = () => {
   const { pathname } = useLocation();
@@ -19,7 +20,7 @@ const App = () => {
       <Routes>
         <Route path="/learn" element={<Learn />} />
         <Route path="/practice" element={<PracticeNew />} />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/about" element={<About />} />
         <Route path="/not-found" element={<NotFound />} />
         <Route path="/" exact element={<Navigate to="/learn" />} />
         <Route path="*" element={<Navigate to="/not-found" />} />
