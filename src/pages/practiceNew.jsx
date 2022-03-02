@@ -1,35 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 import _ from 'lodash';
+import { Scrollbars } from 'react-custom-scrollbars-2';
 import playAudio from '../utils/playAudio';
+import skipCharacter from '../assets/skip-character.png';
 import CustomRadioButton from '../components/customRadioButton';
-
-const practiceOptions = [
-  { value: 'all', label: 'All Characters' },
-  { value: 'favorites', label: 'Favorite Characters' },
-  { value: 'range', label: 'Specify Range' },
-];
-
-const delayOptions = [
-  { value: '3', label: '3s' },
-  { value: '5', label: '5s' },
-  { value: '7', label: '7s' },
-];
-
-const customStyles = {
-  menu: (provided, state) => ({
-    ...provided,
-    width: state.selectProps.width,
-    color: state.selectProps.menuColor,
-    padding: 10,
-  }),
-  option: (provided, state) => ({
-    ...provided,
-    padding: 10,
-    borderRadius: 7,
-  }),
-};
 
 const PracticeNew = () => {
   //   const [practiceType, setPracticeType] = useState('');
@@ -74,12 +50,41 @@ const PracticeNew = () => {
 
   const getFavorites = () => JSON.parse(localStorage.getItem('favorites'));
 
-  /// --------------
   const [practiceType, setPracticeType] = useState('all');
   const [delay, setDelay] = useState(3);
+  const [from, setFrom] = useState(1);
+  const [to, setTo] = useState(6);
+  const [isFromSelected, setIsFromSelected] = useState(true);
+  const [isToSelected, setIsToSelected] = useState(true);
+  const [range, setRange] = useState([]);
 
   const handlePracticeTypeSelect = (value) => setPracticeType(value);
   const handleDelaySelect = (value) => setDelay(value);
+
+  const handleCharacterClick = (item) => {
+    if (!isFromSelected) {
+      setFrom(item);
+      setIsFromSelected(true);
+      setRange([item]);
+    } else if (isFromSelected) {
+      setTo(item);
+      setIsToSelected(true);
+      setRange(_.range(from, item + 1));
+      if (from > item) setRange(_.range(item, from + 1));
+    }
+    if (isFromSelected && isToSelected) {
+      setTo(0);
+      setFrom(item);
+      setIsFromSelected(true);
+      setIsToSelected(false);
+      setRange([item]);
+    }
+  };
+
+  useEffect(() => {
+    setRange(_.range(from, to + 1));
+    console.log(range);
+  }, []);
 
   return (
     <div className="container mx-auto mb-10">
@@ -152,7 +157,7 @@ const PracticeNew = () => {
               </button>
             </div>
             <form
-              //   onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
               className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
               action="#">
               <h3 className="text-xl font-medium text-gray-900 dark:text-white">
@@ -200,44 +205,49 @@ const PracticeNew = () => {
                 </div>
               </div>
               {practiceType === 'range' && (
-                <>
-                  <div className="flex">
-                    <div className="mr-3">
-                      <label
-                        for="from"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                        From
-                      </label>
-                      <input
-                        type="number"
-                        name="from"
-                        id="from"
-                        min="1"
-                        max="46"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                        placeholder="1"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label
-                        for="to"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                        To
-                      </label>
-                      <input
-                        type="number"
-                        name="to"
-                        id="to"
-                        min="1"
-                        max="46"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                        placeholder="46"
-                        required
-                      />
+                <Scrollbars
+                  autoHeight
+                  autoHeightMax={400}
+                  autoHide
+                  autoHideTimeout={1000}>
+                  <div>
+                    <div className="relative w-full text-center">
+                      {_.range(1, 52).map((item, index) => {
+                        if (
+                          item === 37 ||
+                          item === 39 ||
+                          item === 47 ||
+                          item === 48 ||
+                          item === 49
+                        ) {
+                          return (
+                            <img
+                              alt={item}
+                              key={item}
+                              src={skipCharacter}
+                              className="border-2 m-0.5 rounded-lg border-white-200 inline-block p-1 w-6 lg:w-8"
+                            />
+                          );
+                        }
+
+                        return (
+                          <React.Fragment key={item}>
+                            <img
+                              alt={item}
+                              src={require(`../../public/data/characters/imgs/${item}.png`)}
+                              onClick={() => handleCharacterClick(item)}
+                              title="Click to listen"
+                              className={`border-2 m-0.5 rounded-lg border-indigo-200 inline-block p-1 w-6 lg:w-8 cursor-pointer ${
+                                _.includes(range, item) && 'bg-indigo-200'
+                              }`}
+                            />
+                            {(index + 1) % 5 === 0 && <br />}
+                          </React.Fragment>
+                        );
+                      })}
                     </div>
                   </div>
-                </>
+                </Scrollbars>
               )}
               <div>
                 <label
