@@ -74,7 +74,7 @@ const Learn = () => {
                     alt={item}
                     key={item}
                     src={skipCharacter}
-                    className="inline-block border p-2 w-12 lg:w-14"
+                    className="border-4 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-14"
                   />
                 );
               }
@@ -86,7 +86,7 @@ const Learn = () => {
                     src={require(`../../public/data/characters/imgs/${item}.png`)}
                     onClick={() => handleCharacterClick(item)}
                     title="Click to listen"
-                    className={`inline-block border p-1 w-12 lg:w-14 cursor-pointer ${
+                    className={`border-4 hover:p-1 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-14 cursor-pointer ${
                       isItemInFavorite(item) && 'bg-indigo-200'
                     }`}
                   />

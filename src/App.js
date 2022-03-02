@@ -3,6 +3,7 @@ import { Route, Navigate, Routes, useLocation } from 'react-router-dom';
 import NavBar from './components/navBar';
 import Learn from './pages/learn';
 import Practice from './pages/practice';
+import PracticeNew from './pages/practiceNew';
 import Favorites from './pages/favorites';
 import NotFound from './pages/app/notFound';
 import './App.css';
@@ -17,7 +18,7 @@ const App = () => {
         pathname === '/not-found' || <NavBar />}
       <Routes>
         <Route path="/learn" element={<Learn />} />
-        <Route path="/practice" element={<Practice />} />
+        <Route path="/practice" element={<PracticeNew />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/not-found" element={<NotFound />} />
         <Route path="/" exact element={<Navigate to="/learn" />} />
