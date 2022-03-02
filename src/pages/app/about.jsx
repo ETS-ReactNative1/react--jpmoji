@@ -18,6 +18,9 @@ const About = () => {
           See Version 1 @ https://hpn-katakana.netlify.app
         </a>
         <p className="mt-5">{t('about.text')}</p>
+        <small className="text-indigo-500 mt-5 inline-block">
+          by mr.htetphyonaing@gmail.com
+        </small>
       </div>
     </div>
   );
