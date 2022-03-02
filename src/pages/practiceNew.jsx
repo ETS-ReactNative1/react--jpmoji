@@ -12,22 +12,22 @@ const PracticeNew = () => {
   //   const [practiceTypeText, setPracticeTypeText] = useState('');
   //   const [delay, setDelay] = useState(3);
   //   const [delayText, setDelayText] = useState('');
-  //   const [shuffledItems, setShuffledItems] = useState([]);
+  const [shuffledItems, setShuffledItems] = useState([]);
 
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  //     if (practiceType === 'all') {
-  //       let range = _.range(1, 47);
-  //       range = _.without(range, 37, 39, 47, 48, 49);
-  //       const shuffledRange = _.shuffle(range);
-  //       setShuffledItems(shuffledRange);
+    if (practiceType === 'all') {
+      let allCharacters = _.range(1, 47);
+      let characters = _.without(allCharacters, 37, 39, 47, 48, 49);
+      const shuffledRange = _.shuffle(characters);
+      setShuffledItems(shuffledRange);
 
-  //       shuffledRange.forEach((name, index) =>
-  //         setTimeout(() => playAudio(name), delay * index * 1000)
-  //       );
-  //     }
-  //   };
+      shuffledRange.forEach((name, index) =>
+        setTimeout(() => playAudio(name), delay * index * 1000)
+      );
+    }
+  };
 
   //   const handlePracticeOptionChange = (selected) => {
   //     const a = selected.value;
@@ -110,26 +110,20 @@ const PracticeNew = () => {
         </div>
 
         <div className="w-full mt-3" style={{ zIndex: 99 }}>
-          {/* {shuffledItems &&
+          {shuffledItems &&
             shuffledItems.map((item, index) => {
               return (
                 <React.Fragment key={item}>
-                  <figure
-                    onClick={() => handleCharacterClick(item)}
-                    title="Click to listen"
-                    className="inline-block border p-2 w-12 lg:w-14 cursor-pointer">
+                  <figure className="border-4 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-14">
                     <img
                       alt={item}
                       src={require(`../../public/data/characters/imgs/${item}.png`)}
                     />
-                    <figcaption className="text-gray-400 text-xs">
-                      {index + 1}
-                    </figcaption>
                   </figure>
                   {(index + 1) % 5 === 0 && <br />}
                 </React.Fragment>
               );
-            })} */}
+            })}
         </div>
       </div>
 
@@ -157,7 +151,7 @@ const PracticeNew = () => {
               </button>
             </div>
             <form
-              // onSubmit={handleSubmit}
+              onSubmit={handleSubmit}
               className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
               action="#">
               <h3 className="text-xl font-medium text-gray-900 dark:text-white">
