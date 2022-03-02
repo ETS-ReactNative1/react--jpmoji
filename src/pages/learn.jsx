@@ -55,7 +55,7 @@ const Learn = () => {
 
   return (
     <div className="container mx-auto mb-10">
-      <div className="flex flex-col md:flex-row md:mt-5 justify-center">
+      <div className="flex flex-col md:flex-row justify-center">
         <div className="order-2 md:order-1 text-center mr-3">
           <span className="text-gray-600 text-xs leading-none">
             Click the character to learn, and make sure speaker is on.
@@ -74,7 +74,7 @@ const Learn = () => {
                     alt={item}
                     key={item}
                     src={skipCharacter}
-                    className="border-4 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-14"
+                    className="border-4 m-1 rounded-lg border-white-100 inline-block p-2 w-12 lg:w-10 xl:w-12"
                   />
                 );
               }
@@ -86,7 +86,7 @@ const Learn = () => {
                     src={require(`../../public/data/characters/imgs/${item}.png`)}
                     onClick={() => handleCharacterClick(item)}
                     title="Click to listen"
-                    className={`border-4 hover:p-1 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-14 cursor-pointer ${
+                    className={`border-4 hover:p-1 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-10 xl:w-12 cursor-pointer ${
                       isItemInFavorite(item) && 'bg-indigo-200'
                     }`}
                   />

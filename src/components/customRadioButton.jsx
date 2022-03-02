@@ -30,7 +30,9 @@ const CustomRadioButton = ({
           </svg>
         )}
       </div>
-      <small className="text-green-500 block text-xs">{description}</small>
+      <small className="text-green-500 text-xs hidden md:inline-block">
+        {description}
+      </small>
     </div>
   );
 };

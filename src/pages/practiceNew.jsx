@@ -80,7 +80,7 @@ const PracticeNew = () => {
   return (
     <div className="container mx-auto mb-10">
       <div className="text-center">
-        <div className="block">
+        <div className="block mt-3">
           <button
             onClick={handleModal}
             className="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
