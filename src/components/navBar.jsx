@@ -2,26 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-const langs = [
-  { value: 'en', label: 'En' },
-  { value: 'mm', label: 'Mm' },
-  { value: 'jp', label: 'Jp' },
-];
-
-const customStyles = {
-  menu: (provided, state) => ({
-    ...provided,
-    width: state.selectProps.width,
-    color: state.selectProps.menuColor,
-    padding: 10,
-  }),
-  option: (provided, state) => ({
-    ...provided,
-    padding: 10,
-    borderRadius: 7,
-  }),
-};
-
 const NavBar = ({ currentLang: lang, langChange }) => {
   const { t } = useTranslation();
   const [currentLang, setCurrentLang] = useState('en-US');
@@ -163,19 +143,12 @@ const NavBar = ({ currentLang: lang, langChange }) => {
             <li>
               <select
                 onChange={langChange}
+                value={currentLang}
                 className="mr-2 rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-indigo-500 dark:focus:ring-indigo-500">
                 <option value="en-US">English</option>
                 <option value="ja-JP">日本語</option>
                 <option value="my-MM">မြန်မာ</option>
               </select>
-              {/* <Select
-                options={langs}
-                styles={customStyles}
-                hideSelectedOptions={true}
-                isSearchable={false}
-                isClearable={false}
-                required={true}
-              /> */}
             </li>
           </ul>
         </div>
