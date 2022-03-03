@@ -6,6 +6,7 @@ const NavBar = ({ currentLang: lang, langChange }) => {
   const { t } = useTranslation();
   const [currentLang, setCurrentLang] = useState('en-US');
   const { pathname } = useLocation();
+  const [menuVisibility, setMenuVisibility] = useState(false);
 
   useEffect(() => {
     // seting language in select box
@@ -63,12 +64,13 @@ const NavBar = ({ currentLang: lang, langChange }) => {
           </div>
         </Link>
         <button
+          onClick={() => setMenuVisibility(!menuVisibility)}
           data-collapse-toggle="mobile-menu"
           type="button"
           className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           aria-controls="mobile-menu-2"
           aria-expanded="false">
-          <span className="sr-only">Open main menu</span>
+          <span class="sr-only">Open main menu</span>
           <svg
             className="w-6 h-6"
             fill="currentColor"
@@ -90,9 +92,13 @@ const NavBar = ({ currentLang: lang, langChange }) => {
               clipRule="evenodd"></path>
           </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
+        <div
+          className={`w-full md:block md:w-auto  ${
+            menuVisibility ? '' : 'hidden'
+          }`}
+          id="mobile-menu">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-            <li>
+            <li onClick={() => setMenuVisibility(false)}>
               <NavLink
                 to="/learn"
                 className="block rounded py-2 px-3 md:rounded-3xl"
@@ -109,7 +115,7 @@ const NavBar = ({ currentLang: lang, langChange }) => {
                 )}
               </NavLink>
             </li>
-            <li>
+            <li onClick={() => setMenuVisibility(false)}>
               <NavLink
                 to="/practice"
                 className="block rounded py-2 px-3 md:rounded-3xl">
@@ -125,7 +131,7 @@ const NavBar = ({ currentLang: lang, langChange }) => {
                 )}
               </NavLink>
             </li>
-            <li>
+            <li onClick={() => setMenuVisibility(false)}>
               <NavLink
                 to="/about"
                 className="block rounded py-2 px-3 md:rounded-3xl">
@@ -149,7 +155,7 @@ const NavBar = ({ currentLang: lang, langChange }) => {
               <select
                 onChange={langChange}
                 value={currentLang}
-                className="mr-2 rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-indigo-500 dark:focus:ring-indigo-500">
+                className="block mt-3 md:mt-0 mr-2 rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-indigo-500 dark:focus:ring-indigo-500">
                 <option value="en-US">English</option>
                 <option value="ja-JP">日本語</option>
                 <option value="my-MM">မြန်မာ</option>
