@@ -2,15 +2,29 @@ import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
+import { ToggleButtonGroup, ToggleButton } from '@mui/material';
+import Cookies from 'js-cookie';
 import Favorite from '../components/favorite';
 import { playAudio } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
+
+const characterSizes = {
+  l: 14,
+  m: 12,
+  s: 10,
+};
 
 const Learn = ({ selectedCharacter }) => {
   useTitle('Hiragana | Learn');
   const { t } = useTranslation();
   const [gifNumber, setGifNumber] = useState(1);
   const [favorite, setIsFavorite] = useState(false);
+  const [characterSize, setCharacterSize] = useState('m');
+
+  const handleCharacterSize = (e, value) => {
+    setCharacterSize(value);
+    Cookies.set('charSize', value);
+  };
 
   const handleCharacterClick = (item) => {
     playAudio(item);
@@ -60,15 +74,40 @@ const Learn = ({ selectedCharacter }) => {
     if (!('hiFavorites' in localStorage) || !('kaFavorites' in localStorage))
       initializeFavorites();
     updateFavoriteToggleState(gifNumber);
+
+    const charSize = Cookies.get('charSize');
+    if (!charSize) Cookies.set('charSize', 'm');
+    else setCharacterSize(charSize);
   }, []);
 
   return (
     <div className="container mx-auto mb-10">
       <div className="flex flex-col md:flex-row justify-center">
+        <div className="mt-7 mb-3 mr-3">
+          <div className="cursor-pointer">
+            <ToggleButtonGroup
+              value={characterSize}
+              onChange={handleCharacterSize}
+              size="small"
+              orientation="vertical"
+              exclusive>
+              <ToggleButton value="l" aria-label="list">
+                <span title="Large size">L</span>
+              </ToggleButton>
+              <ToggleButton value="m" aria-label="module">
+                <span title="Medium size">M</span>
+              </ToggleButton>
+              <ToggleButton value="s" aria-label="quilt">
+                <span title="Size size">S</span>
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </div>
+        </div>
         <div className="order-2 md:order-1 text-center mr-3">
           <span className="text-gray-600 text-xs leading-none">
             {t('learn.body.desc')}
           </span>
+
           <div className="relative w-full mt-1">
             {_.range(1, 52).map((item, index) => {
               if (
@@ -83,7 +122,7 @@ const Learn = ({ selectedCharacter }) => {
                     alt={item}
                     key={item}
                     src={skipCharacter}
-                    className="border-4 m-1 rounded-lg border-white-100 inline-block p-2 w-12 lg:w-10 xl:w-14"
+                    className={`border-4 m-1 rounded-lg border-white-100 inline-block p-2 w-12 lg:w-${characterSizes[characterSize]}`}
                   />
                 );
               }
@@ -95,7 +134,9 @@ const Learn = ({ selectedCharacter }) => {
                     src={require(`../../public/data/characters/imgs/${selectedCharacter}/${item}.png`)}
                     onClick={() => handleCharacterClick(item)}
                     title="Click to listen"
-                    className={`border-4 hover:p-1 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-10 xl:w-14 cursor-pointer ${
+                    className={`border-4 hover:p-1 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-${
+                      characterSizes[characterSize]
+                    } cursor-pointer ${
                       isItemInFavorite(item) && 'bg-indigo-200'
                     }`}
                   />
