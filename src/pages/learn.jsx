@@ -9,8 +9,8 @@ import { playAudio } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
 
 const characterSizes = {
-  l: 14,
-  m: 12,
+  l: 16,
+  m: 14,
   s: 10,
 };
 
@@ -19,10 +19,11 @@ const Learn = ({ selectedCharacter }) => {
   const { t } = useTranslation();
   const [gifNumber, setGifNumber] = useState(1);
   const [favorite, setIsFavorite] = useState(false);
-  const [characterSize, setCharacterSize] = useState('m');
+  const [characterSize, setCharacterSize] = useState('');
 
   const handleCharacterSize = (e, value) => {
     setCharacterSize(value);
+    console.log(characterSize);
     Cookies.set('charSize', value);
   };
 
@@ -75,78 +76,83 @@ const Learn = ({ selectedCharacter }) => {
       initializeFavorites();
     updateFavoriteToggleState(gifNumber);
 
-    const charSize = Cookies.get('charSize');
-    if (!charSize) Cookies.set('charSize', 'm');
-    else setCharacterSize(charSize);
+    const charSz = Cookies.get('charSize');
+    if (!charSz) {
+      setCharacterSize('m');
+      Cookies.set('charSize', 'm');
+    } else setCharacterSize(Cookies.get('charSize'));
   }, []);
 
   return (
     <div className="container mx-auto mb-10">
       <div className="flex flex-col md:flex-row justify-center">
-        <div className="mt-7 mb-3 mr-3">
-          <div className="cursor-pointer">
-            <ToggleButtonGroup
-              value={characterSize}
-              onChange={handleCharacterSize}
-              size="small"
-              orientation="vertical"
-              exclusive>
-              <ToggleButton value="l" aria-label="list">
-                <span title="Large size">L</span>
-              </ToggleButton>
-              <ToggleButton value="m" aria-label="module">
-                <span title="Medium size">M</span>
-              </ToggleButton>
-              <ToggleButton value="s" aria-label="quilt">
-                <span title="Size size">S</span>
-              </ToggleButton>
-            </ToggleButtonGroup>
-          </div>
-        </div>
         <div className="order-2 md:order-1 text-center mr-3">
           <span className="text-gray-600 text-xs leading-none">
             {t('learn.body.desc')}
           </span>
 
-          <div className="relative w-full mt-1">
-            {_.range(1, 52).map((item, index) => {
-              if (
-                item === 37 ||
-                item === 39 ||
-                item === 47 ||
-                item === 48 ||
-                item === 49
-              ) {
-                return (
-                  <img
-                    alt={item}
-                    key={item}
-                    src={skipCharacter}
-                    className={`border-4 m-1 rounded-lg border-white-100 inline-block p-2 w-12 lg:w-${characterSizes[characterSize]}`}
-                  />
-                );
-              }
+          <div className="flex justify-center w-full mt-3">
+            <div className="flex">
+              <ToggleButtonGroup
+                value={characterSize}
+                onChange={handleCharacterSize}
+                className="mt-1 mr-2"
+                size="small"
+                orientation="vertical"
+                exclusive>
+                <ToggleButton value="l" aria-label="list">
+                  <span title="Large size">L</span>
+                </ToggleButton>
+                <ToggleButton value="m" aria-label="module">
+                  <span title="Medium size">M</span>
+                </ToggleButton>
+                <ToggleButton value="s" aria-label="quilt">
+                  <span title="Size size">S</span>
+                </ToggleButton>
+              </ToggleButtonGroup>
+              <div className="flex-col">
+                {_.range(1, 52).map((item, index) => {
+                  if (
+                    item === 37 ||
+                    item === 39 ||
+                    item === 47 ||
+                    item === 48 ||
+                    item === 49
+                  ) {
+                    return (
+                      <img
+                        alt={item}
+                        key={item}
+                        src={skipCharacter}
+                        className={`border-4 m-1 rounded-lg border-white-100 inline-block p-2 w-10 lg:w-${characterSizes[characterSize]} xl:w-${characterSizes[characterSize]} `}
+                      />
+                    );
+                  }
 
-              return (
-                <React.Fragment key={item}>
-                  <img
-                    alt={item}
-                    src={require(`../../public/data/characters/imgs/${selectedCharacter}/${item}.png`)}
-                    onClick={() => handleCharacterClick(item)}
-                    title="Click to listen"
-                    className={`border-4 hover:p-1 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-${
-                      characterSizes[characterSize]
-                    } cursor-pointer ${
-                      isItemInFavorite(item) && 'bg-indigo-200'
-                    }`}
-                  />
-                  {(index + 1) % 5 === 0 && <br />}
-                </React.Fragment>
-              );
-            })}
+                  return (
+                    <React.Fragment key={item}>
+                      <img
+                        alt={item}
+                        src={require(`../../public/data/characters/imgs/${selectedCharacter}/${item}.png`)}
+                        onClick={() => handleCharacterClick(item)}
+                        title="Click to listen"
+                        className={`w-10 lg:w-${
+                          characterSizes[characterSize]
+                        } xl:w-${
+                          characterSizes[characterSize]
+                        } border-4 hover:p-1 m-1 rounded-lg border-indigo-200 inline-block p-2 cursor-pointer ${
+                          isItemInFavorite(item) && 'bg-indigo-200'
+                        }`}
+                      />
+                      {(index + 1) % 5 === 0 && <br />}
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
-        <div className="w-32 mt-7 mb-3 mx-auto md:mx-0 md:order-2">
+        <div className="w-32 mt-10 mb-3 mx-auto md:mx-0 md:order-2">
           <div className="flex justify-center">
             {gifNumber > 0 && (
               <img
