@@ -14,6 +14,11 @@ const characterSizes = {
   s: 10,
 };
 
+// bugs:
+// toggle button: same action -> selected effect disappear
+// ka|hi toggle button: same problem
+// size changing: responsive not ok yet.
+
 const Learn = ({ selectedCharacter }) => {
   useTitle('Hiragana | Learn');
   const { t } = useTranslation();
