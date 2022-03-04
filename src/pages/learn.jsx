@@ -21,36 +21,40 @@ const Learn = ({ selectedCharacter }) => {
   const showGif = (item) => setGifNumber(item);
 
   const updateFavoriteToggleState = (item) =>
-    _.includes(getFavorites(), item)
+    _.includes(getFavorites(selectedCharacter), item)
       ? setIsFavorite(true)
       : setIsFavorite(false);
 
   const handleFavorite = (e) => {
     setIsFavorite(true);
     if (e.target.checked) {
-      const prevFavorites = getFavorites();
-      setFavorites([...prevFavorites, gifNumber]);
+      const prevFavorites = getFavorites(selectedCharacter);
+      setFavorites([...prevFavorites, gifNumber], selectedCharacter);
     } else {
       setIsFavorite(false);
-      removeFromFavorite(gifNumber);
+      removeFavorite(gifNumber, selectedCharacter);
     }
   };
 
-  function removeFromFavorite(item) {
-    const favorites = getFavorites();
+  function removeFavorite(item, type) {
+    const favorites = getFavorites(type);
     const updatedFavorites = _.without(favorites, item);
-    setFavorites(updatedFavorites);
+    setFavorites(updatedFavorites, type);
   }
 
-  const initializeFavorites = () =>
-    localStorage.setItem('favorites', JSON.stringify([]));
+  const initializeFavorites = () => {
+    localStorage.setItem('kaFavorites', JSON.stringify([]));
+    localStorage.setItem('hiFavorites', JSON.stringify([]));
+  };
 
-  const getFavorites = () => JSON.parse(localStorage.getItem('favorites'));
+  const getFavorites = (type) =>
+    JSON.parse(localStorage.getItem(`${type}Favorites`)); // hiFavorites || kaFavorites
 
-  const setFavorites = (arr) =>
-    localStorage.setItem('favorites', JSON.stringify(arr));
+  const setFavorites = (arr, type) =>
+    localStorage.setItem(`${type}Favorites`, JSON.stringify(arr));
 
-  const isItemInFavorite = (item) => _.includes(getFavorites(), item);
+  const isItemInFavorite = (item) =>
+    _.includes(getFavorites(selectedCharacter), item);
 
   useEffect(() => {
     if (!('favorites' in localStorage)) initializeFavorites();
