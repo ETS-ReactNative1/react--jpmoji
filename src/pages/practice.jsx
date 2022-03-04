@@ -21,7 +21,8 @@ const Practice = ({ selectedCharacter }) => {
   const [range, setRange] = useState([]);
   const [shuffledItems, setShuffledItems] = useState([]);
 
-  const getFavorites = () => JSON.parse(localStorage.getItem('favorites'));
+  const getFavorites = () =>
+    JSON.parse(localStorage.getItem(`${selectedCharacter}Favorites`));
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -57,9 +57,9 @@ const Learn = ({ selectedCharacter }) => {
     _.includes(getFavorites(selectedCharacter), item);
 
   useEffect(() => {
-    if (!('favorites' in localStorage)) initializeFavorites();
+    if (!('hiFavorites' in localStorage) || !('kaFavorites' in localStorage))
+      initializeFavorites();
     updateFavoriteToggleState(gifNumber);
-    console.log(selectedCharacter);
   }, []);
 
   return (
@@ -83,7 +83,7 @@ const Learn = ({ selectedCharacter }) => {
                     alt={item}
                     key={item}
                     src={skipCharacter}
-                    className="border-4 m-1 rounded-lg border-white-100 inline-block p-2 w-12 lg:w-10 xl:w-12"
+                    className="border-4 m-1 rounded-lg border-white-100 inline-block p-2 w-12 lg:w-10 xl:w-14"
                   />
                 );
               }
@@ -95,7 +95,7 @@ const Learn = ({ selectedCharacter }) => {
                     src={require(`../../public/data/characters/imgs/${selectedCharacter}/${item}.png`)}
                     onClick={() => handleCharacterClick(item)}
                     title="Click to listen"
-                    className={`border-4 hover:p-1 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-10 xl:w-12 cursor-pointer ${
+                    className={`border-4 hover:p-1 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-10 xl:w-14 cursor-pointer ${
                       isItemInFavorite(item) && 'bg-indigo-200'
                     }`}
                   />
