@@ -7,7 +7,7 @@ import { playAudioWave } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
 import CustomRadioButton from '../components/customRadioButton';
 
-const Practice = () => {
+const Practice = ({ selectedCharacter }) => {
   useTitle('Hiragana | Practice');
   const { t } = useTranslation();
   const [modalVisibility, setModalVisibility] = useState(false);
@@ -139,7 +139,7 @@ const Practice = () => {
                   <figure className="border-4 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-14">
                     <img
                       alt={item}
-                      src={require(`../../public/data/characters/imgs/${item}.png`)}
+                      src={require(`../../public/data/characters/imgs/${selectedCharacter}/${item}.png`)}
                     />
                   </figure>
                   {(index + 1) % 5 === 0 && <br />}
@@ -242,7 +242,7 @@ const Practice = () => {
                           <img
                             key={item}
                             alt={item}
-                            src={require(`../../public/data/characters/imgs/${item}.png`)}
+                            src={require(`../../public/data/characters/imgs/${selectedCharacter}/${item}.png`)}
                             onClick={() => handleCharacterClick(item)}
                             className={`border-2 m-0.5 rounded-lg border-indigo-200 inline-block p-1 w-7 lg:w-9 cursor-pointer ${
                               _.includes(range, item) && 'bg-indigo-200'

@@ -5,6 +5,13 @@
   padding: 0.5rem;
 }
 
+.active-choice {
+  color: #ffffff;
+  background-color: #22c55e;
+  display: block;
+  padding: 0.5rem;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .active {

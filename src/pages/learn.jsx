@@ -6,7 +6,7 @@ import Favorite from '../components/favorite';
 import { playAudio } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
 
-const Learn = () => {
+const Learn = ({ selectedCharacter }) => {
   useTitle('Hiragana | Learn');
   const { t } = useTranslation();
   const [gifNumber, setGifNumber] = useState(1);
@@ -55,6 +55,7 @@ const Learn = () => {
   useEffect(() => {
     if (!('favorites' in localStorage)) initializeFavorites();
     updateFavoriteToggleState(gifNumber);
+    console.log(selectedCharacter);
   }, []);
 
   return (
@@ -87,7 +88,7 @@ const Learn = () => {
                 <React.Fragment key={item}>
                   <img
                     alt={item}
-                    src={require(`../../public/data/characters/imgs/${item}.png`)}
+                    src={require(`../../public/data/characters/imgs/${selectedCharacter}/${item}.png`)}
                     onClick={() => handleCharacterClick(item)}
                     title="Click to listen"
                     className={`border-4 hover:p-1 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-10 xl:w-12 cursor-pointer ${
@@ -105,7 +106,7 @@ const Learn = () => {
             {gifNumber > 0 && (
               <img
                 alt={gifNumber}
-                src={require(`../../public/data/characters/gifs/${gifNumber}.gif`)}
+                src={require(`../../public/data/characters/gifs/${selectedCharacter}/${gifNumber}.gif`)}
                 className="border-4 rounded-lg border-indigo-300 shadow-none md:shadow-xl"
               />
             )}

@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 
-const NavBar = ({ currentLang: lang, langChange }) => {
+const NavBar = ({
+  currentLang: lang,
+  langChange,
+  selectedCharacter,
+  handleCharacter,
+}) => {
   const { t } = useTranslation();
   const [currentLang, setCurrentLang] = useState('en-US');
   const { pathname } = useLocation();
@@ -70,7 +76,7 @@ const NavBar = ({ currentLang: lang, langChange }) => {
           className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           aria-controls="mobile-menu-2"
           aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
+          <span className="sr-only">Open main menu</span>
           <svg
             className="w-6 h-6"
             fill="currentColor"
@@ -98,6 +104,34 @@ const NavBar = ({ currentLang: lang, langChange }) => {
           }`}
           id="mobile-menu">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+            <li>
+              <ToggleButtonGroup
+                value={selectedCharacter}
+                onChange={handleCharacter}
+                color="primary"
+                exclusive>
+                <ToggleButton
+                  value="ka"
+                  sx={{
+                    borderRadius: 5,
+                    paddingTop: 0.5,
+                    paddingBottom: 0.5,
+                    marginTop: 0.2,
+                  }}>
+                  ヵ
+                </ToggleButton>
+                <ToggleButton
+                  value="hi"
+                  sx={{
+                    borderRadius: 5,
+                    paddingTop: 0.5,
+                    paddingBottom: 0.5,
+                    marginTop: 0.2,
+                  }}>
+                  ひ
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </li>
             <li onClick={() => setMenuVisibility(false)}>
               <NavLink
                 to="/learn"
