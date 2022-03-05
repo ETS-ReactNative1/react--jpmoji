@@ -8,16 +8,11 @@ import Favorite from '../components/favorite';
 import { playAudio } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
 
-const characterSizes = {
-  l: 16,
-  m: 14,
-  s: 10,
-};
+const characterSizes = { l: 'w-14', m: 'w-12', s: 'w-10' };
 
 // bugs:
 // toggle button: same action -> selected effect disappear
 // ka|hi toggle button: same problem
-// size changing: responsive not ok yet.
 
 const Learn = ({ selectedCharacter }) => {
   useTitle('Hiragana | Learn');
@@ -105,7 +100,7 @@ const Learn = ({ selectedCharacter }) => {
                 size="small"
                 orientation="vertical"
                 exclusive>
-                <ToggleButton value="l" aria-label="list">
+                <ToggleButton value="l" aria-label="list" className="disabled">
                   <span title="Large size">L</span>
                 </ToggleButton>
                 <ToggleButton value="m" aria-label="module">
@@ -129,7 +124,7 @@ const Learn = ({ selectedCharacter }) => {
                         alt={item}
                         key={item}
                         src={skipCharacter}
-                        className={`border-4 m-1 rounded-lg border-white-100 inline-block p-2 w-10 lg:w-${characterSizes[characterSize]} xl:w-${characterSizes[characterSize]} `}
+                        className={`border-4 m-1 rounded-lg border-white-100 inline-block p-2 ${characterSizes[characterSize]}`}
                       />
                     );
                   }
@@ -141,9 +136,7 @@ const Learn = ({ selectedCharacter }) => {
                         src={require(`../../public/data/characters/imgs/${selectedCharacter}/${item}.png`)}
                         onClick={() => handleCharacterClick(item)}
                         title="Click to listen"
-                        className={`w-10 lg:w-${
-                          characterSizes[characterSize]
-                        } xl:w-${
+                        className={`${
                           characterSizes[characterSize]
                         } border-4 hover:p-1 m-1 rounded-lg border-indigo-200 inline-block p-2 cursor-pointer ${
                           isItemInFavorite(item) && 'bg-indigo-200'
