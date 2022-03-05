@@ -101,7 +101,7 @@ const NavBar = ({
           }`}
           id="mobile-menu">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-            <li>
+            <li className="mb-2 md:mb-0 text-center">
               <ToggleButtonGroup
                 value={selectedCharacter}
                 onChange={handleCharacter}
