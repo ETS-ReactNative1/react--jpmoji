@@ -151,7 +151,7 @@ const Practice = ({ selectedCharacter }) => {
       </div>
 
       <div className={`${modalVisibility ? '' : 'hidden'}`}>
-        <div className="fixed right-0 left-0 top-0 bottom-0 z-50 mx-auto flex h-full items-center justify-center overflow-y-auto overflow-x-hidden  shadow-2xl backdrop-blur-sm backdrop-contrast-50 md:inset-0">
+        <div className="fixed right-0 left-0 top-0 bottom-0 z-50 mx-auto flex h-full items-center justify-center overflow-y-auto overflow-x-hidden shadow-2xl  backdrop-blur-sm backdrop-contrast-50 md:inset-0 firefox:bg-gray-200">
           <div className="relative w-full h-auto max-w-lg px-4">
             <div className="relative rounded-lg bg-white shadow dark:bg-gray-700">
               <div className="flex justify-end p-2">
