@@ -23,7 +23,7 @@ const NavBar = ({
   }, [lang]);
 
   return (
-    <nav className="bg-white w-full z-50 sticky top-0 px-2 sm:px-4 py-0.5 rounded dark:bg-gray-800 backdrop-filter backdrop-blur-lg bg-opacity-20 border-b border-gray-200 firefox:bg-opacity-90 pb-5 md:pb-0">
+    <nav className="bg-white w-full z-50 sticky top-0 px-2 sm:px-4 py-0.5 rounded dark:bg-gray-800 backdrop-filter backdrop-blur-lg bg-opacity-20 border-b border-gray-200 firefox:bg-opacity-90">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <Link to="/" className="flex">
           <svg
@@ -186,7 +186,7 @@ const NavBar = ({
               <select
                 onChange={langChange}
                 value={currentLang}
-                className="block mt-3 md:mt-0 mr-2 rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-indigo-500 dark:focus:ring-indigo-500">
+                className="block mt-3 md:mt-0 mr-2 rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-indigo-500 dark:focus:ring-indigo-500 mb-5 md:mb-0">
                 <option value="en-US">English</option>
                 <option value="ja-JP">日本語</option>
                 <option value="my-MM">မြန်မာ</option>
