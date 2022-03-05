@@ -3,16 +3,11 @@ import _ from 'lodash';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
-import Cookies from 'js-cookie';
 import Favorite from '../components/favorite';
 import { playAudio } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
 
 const characterSizes = { l: 'w-14', m: 'w-12', s: 'w-10' };
-
-// bugs:
-// toggle button: same action -> selected effect disappear
-// ka|hi toggle button: same problem
 
 const Learn = ({ selectedCharacter }) => {
   useTitle('Hiragana | Learn');
@@ -23,7 +18,7 @@ const Learn = ({ selectedCharacter }) => {
 
   const handleCharacterSize = (e, value) => {
     if (value !== null) setCharacterSize(value);
-    Cookies.set('charSize', value);
+    saveToLocalStorage('charSize', value);
   };
 
   const handleCharacterClick = (item) => {
@@ -57,15 +52,18 @@ const Learn = ({ selectedCharacter }) => {
   }
 
   const initializeFavorites = () => {
-    localStorage.setItem('kaFavorites', JSON.stringify([]));
-    localStorage.setItem('hiFavorites', JSON.stringify([]));
+    saveToLocalStorage('kaFavorites', JSON.stringify([]));
+    saveToLocalStorage('hiFavorites', JSON.stringify([]));
   };
 
   const getFavorites = (type) =>
-    JSON.parse(localStorage.getItem(`${type}Favorites`)); // hiFavorites || kaFavorites
+    JSON.parse(getFromLocalStorage(`${type}Favorites`));
 
   const setFavorites = (arr, type) =>
-    localStorage.setItem(`${type}Favorites`, JSON.stringify(arr));
+    saveToLocalStorage(`${type}Favorites`, JSON.stringify(arr));
+
+  const saveToLocalStorage = (name, value) => localStorage.setItem(name, value);
+  const getFromLocalStorage = (name) => localStorage.getItem(name);
 
   const isItemInFavorite = (item) =>
     _.includes(getFavorites(selectedCharacter), item);
@@ -75,11 +73,11 @@ const Learn = ({ selectedCharacter }) => {
       initializeFavorites();
     updateFavoriteToggleState(gifNumber);
 
-    const charSz = Cookies.get('charSize');
+    const charSz = localStorage.getItem('charSize');
     if (!charSz) {
       setCharacterSize('m');
-      Cookies.set('charSize', 'm');
-    } else setCharacterSize(Cookies.get('charSize'));
+      saveToLocalStorage('charSize', 'm');
+    } else setCharacterSize(getFromLocalStorage('charSize'));
   }, []);
 
   return (
