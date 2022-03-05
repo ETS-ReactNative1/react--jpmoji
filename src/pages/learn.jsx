@@ -22,8 +22,7 @@ const Learn = ({ selectedCharacter }) => {
   const [characterSize, setCharacterSize] = useState('');
 
   const handleCharacterSize = (e, value) => {
-    setCharacterSize(value);
-    console.log(characterSize);
+    if (value !== null) setCharacterSize(value);
     Cookies.set('charSize', value);
   };
 
