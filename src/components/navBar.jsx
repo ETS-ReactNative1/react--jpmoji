@@ -23,7 +23,7 @@ const NavBar = ({
   }, [lang]);
 
   return (
-    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+    <nav className="bg-white w-full z-50 sticky top-0 px-2 sm:px-4 py-1.5 rounded dark:bg-gray-800 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200 firefox:bg-opacity-90">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <Link to="/" className="flex">
           <svg
@@ -35,7 +35,7 @@ const NavBar = ({
             viewBox="0 0 120 120"
             preserveAspectRatio="xMidYMid meet">
             <g
-              transform="translate(0.000000,120.000000) scale(0.160000,-0.160000)"
+              transform="translate(0.000000,110.000000) scale(0.140000,-0.140000)"
               fill="#000000"
               stroke="none">
               <path
@@ -56,15 +56,12 @@ const NavBar = ({
           </svg>
 
           <div className="flex flex-col">
-            <span className="whitespace-nowrap text-lg font-semibold dark:text-white">
-              hiragana
+            <span className="whitespace-nowrap text-lg font-bold dark:text-white">
+              moji
             </span>
             <div className="md:-mr-20">
               <span className="text-sm text-gray-400">
                 ー {t('learn.nav.welcome')}
-              </span>{' '}
-              <span className="rounded-full bg-indigo-200 p-2 text-sm text-indigo-500">
-                student
               </span>
             </div>
           </div>
@@ -99,12 +96,12 @@ const NavBar = ({
           </svg>
         </button>
         <div
-          className={`w-full md:block md:w-auto  ${
+          className={`w-full md:block md:w-auto   ${
             menuVisibility ? '' : 'hidden'
           }`}
           id="mobile-menu">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-            <li className="mb-3">
+            <li>
               <ToggleButtonGroup
                 value={selectedCharacter}
                 onChange={handleCharacter}
