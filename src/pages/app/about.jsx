@@ -3,7 +3,7 @@ import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
 
 const About = () => {
-  useTitle('Hiragana | About');
+  useTitle('Momoji | About');
   const { t } = useTranslation();
 
   return (

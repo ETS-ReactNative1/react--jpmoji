@@ -8,7 +8,9 @@ import skipCharacter from '../assets/skip-character.png';
 import CustomRadioButton from '../components/customRadioButton';
 
 const Practice = ({ selectedCharacter }) => {
-  useTitle('Hiragana | Practice');
+  selectedCharacter === 'ka'
+    ? useTitle('Katakana | Practice')
+    : useTitle('Hiragana | Practice');
   const { t } = useTranslation();
   const [modalVisibility, setModalVisibility] = useState(false);
   const [audioWaveVisibility, setAudioWaveVisibility] = useState(false);

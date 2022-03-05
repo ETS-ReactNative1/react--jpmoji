@@ -10,7 +10,9 @@ import skipCharacter from '../assets/skip-character.png';
 const characterSizes = { l: 'w-14', m: 'w-12', s: 'w-10' };
 
 const Learn = ({ selectedCharacter }) => {
-  useTitle('Hiragana | Learn');
+  selectedCharacter === 'ka'
+    ? useTitle('Katakana | Learn')
+    : useTitle('Hiragana | Learn');
   const { t } = useTranslation();
   const [gifNumber, setGifNumber] = useState(1);
   const [favorite, setIsFavorite] = useState(false);
