@@ -57,7 +57,7 @@ const NavBar = ({
 
           <div className="flex flex-col">
             <span className="whitespace-nowrap text-lg font-bold dark:text-white">
-              momoji
+              M0Ji
             </span>
             <div className="md:-mr-20">
               <span className="text-sm text-gray-400">
