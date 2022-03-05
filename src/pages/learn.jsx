@@ -83,7 +83,7 @@ const Learn = ({ selectedCharacter }) => {
   return (
     <div className="container mx-auto mb-10">
       <div className="flex flex-col md:flex-row justify-center">
-        <div className="order-2 md:order-1 text-center mr-3">
+        <div className="order-2 md:order-1 text-center mr-3 md:mt-5">
           <span className="text-gray-600 text-xs leading-none">
             {t('learn.body.desc')}
           </span>
@@ -147,7 +147,7 @@ const Learn = ({ selectedCharacter }) => {
             </div>
           </div>
         </div>
-        <div className="w-32 mt-10 mb-3 mx-auto md:mx-0 md:order-2">
+        <div className="w-32 mt-10 md:mt-14 mb-3 mx-auto md:mx-0 md:order-2">
           <div className="flex justify-center">
             {gifNumber > 0 && (
               <img

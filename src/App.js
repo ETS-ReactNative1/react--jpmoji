@@ -26,11 +26,18 @@ const App = () => {
 
   const handleCharacter = (e, value) => {
     if (value !== null) setSelectedCharacter(value);
+    saveToLocalStorage('charType', value);
   };
+
+  const saveToLocalStorage = (name, value) => localStorage.setItem(name, value);
+  const getFromLocalStorage = (name) => localStorage.getItem(name);
 
   useEffect(() => {
     // lang
     setLanguage(getLangCookie());
+
+    const currentCharType = getFromLocalStorage('charType');
+    if (currentCharType) setSelectedCharacter(currentCharType);
   }, []);
 
   return (
