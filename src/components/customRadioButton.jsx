@@ -12,14 +12,14 @@ const CustomRadioButton = ({
   return (
     <div
       onClick={() => onClick(value)}
-      className={`py-2 px-3 md:px-4 bg-white cursor-pointer rounded-lg font-medium border-4 border-white-300 
+      className={`py-2 px-2 md:px-4 bg-white cursor-pointer rounded-lg font-medium border-4 border-white-300 
       ${isSelected && 'border-indigo-400'}`}>
       <div className="flex justify-between items-center">
         <span>{label}</span>
         {isSelected && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
+            className="h-3.5 w-3.5"
             viewBox="0 0 20 20"
             fill="#6875f5">
             <path
@@ -30,9 +30,7 @@ const CustomRadioButton = ({
           </svg>
         )}
       </div>
-      <small className="text-green-500 text-xs hidden md:block">
-        {description}
-      </small>
+      <small className="text-green-500 text-xs">{description}</small>
     </div>
   );
 };
