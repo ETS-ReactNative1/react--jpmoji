@@ -25,7 +25,7 @@ const App = () => {
   };
 
   const handleCharacter = (e, value) => {
-    setSelectedCharacter(value);
+    if (value !== null) setSelectedCharacter(value);
   };
 
   useEffect(() => {
