@@ -32,3 +32,7 @@
 .inner {
   width: 80%;
 }
+
+body {
+  font-family: 'Inter';
+}
