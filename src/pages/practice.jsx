@@ -15,6 +15,7 @@ const Practice = ({ selectedCharacter }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [audioWaveVisibility, setAudioWaveVisibility] = useState(false);
   const [practiceType, setPracticeType] = useState('all');
+  const [practiceTypeDesc, setPracticeTypeDesc] = useState('');
   const [delay, setDelay] = useState(3);
   const [from, setFrom] = useState(1);
   const [to, setTo] = useState(6);
@@ -29,11 +30,19 @@ const Practice = ({ selectedCharacter }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (practiceType === 'all')
-      shaffleAndPlay(_.without(_.range(1, 47), 37, 39, 47, 48, 49));
-    else if (practiceType === 'favorites') shaffleAndPlay(getFavorites());
-    else if (practiceType === 'range') {
-      shaffleAndPlay(_.without(range, 37, 39, 47, 48, 49));
+    switch (practiceType) {
+      case 'all':
+        shaffleAndPlay(_.without(_.range(1, 47), 37, 39, 47, 48, 49));
+        setPracticeTypeDesc(t('practice.practiceTypeA'));
+        break;
+      case 'favorites':
+        shaffleAndPlay(getFavorites());
+        setPracticeTypeDesc(t('practice.practiceTypeB'));
+        break;
+      case 'range':
+        shaffleAndPlay(_.without(range, 37, 39, 47, 48, 49));
+        setPracticeTypeDesc(t('practice.practiceTypeC'));
+        break;
     }
 
     setModalVisibility(false);
@@ -127,7 +136,9 @@ const Practice = ({ selectedCharacter }) => {
           </button>
 
           <div className={`outer mt-5 ${audioWaveVisibility ? '' : 'hidden'}`}>
-            {/* <label className="text-xs">Audio...</label> */}
+            <label className="text-sm mb-2">
+              {t('practice.practicingTypeDesc')} {practiceTypeDesc}
+            </label>
             <div id="waveform" className="max-w-sm h-6 border-y-2 inner"></div>
           </div>
         </div>

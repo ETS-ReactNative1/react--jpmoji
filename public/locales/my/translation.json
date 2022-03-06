@@ -14,6 +14,10 @@
   },
   "practice": {
     "setupButton": "လေ့ကျင့်ဖို့ setting သတ်မှတ်ပါ",
+    "practicingTypeDesc": "Practice အမျိုးအစား: ",
+    "practiceTypeA": "အားလုံး",
+    "practiceTypeB": "ခက်ခဲတဲ့စာလုံး",
+    "practiceTypeC": "Range",
     "modal": {
       "title": "Practice Settings သတ်မှတ်ပါ",
       "howToPractice": "အသံကို နားထောင်ပြီး အလွတ်ချရေးပါ. မမှတ်မိတဲ့စာလုံးပါပါက မကြည့်ဘဲကျော်သွားပြီး နောက်တစ်လုံးကို နားထောင်ပါ. မမှတ်မိတဲ့စာလုံးကို ခက်တဲ့စာလုံးအဖြစ်ထည့်ပြီး ထပ်ခါထပ်ခါလေ့ကျင့်ပါ.",
