@@ -127,10 +127,8 @@ const Practice = ({ selectedCharacter }) => {
           </button>
 
           <div className={`outer mt-5 ${audioWaveVisibility ? '' : 'hidden'}`}>
-            <label className="text-xs">Audio...</label>
-            <div
-              id="waveform"
-              className="max-w-sm border-2 h-6 rounded-full inner"></div>
+            {/* <label className="text-xs">Audio...</label> */}
+            <div id="waveform" className="max-w-sm h-6 border-y-2 inner"></div>
           </div>
         </div>
 
@@ -175,7 +173,7 @@ const Practice = ({ selectedCharacter }) => {
               </div>
               <form
                 onSubmit={handleSubmit}
-                className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8">
+                className="px-6 pb-4 space-y-4 lg:px-8 sm:pb-6 xl:pb-8">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
                   {t('practice.modal.title')}{' '}
                   <svg
@@ -190,7 +188,10 @@ const Practice = ({ selectedCharacter }) => {
                     />
                   </svg>
                 </h3>
-                <div className="ml-2">
+                <span className="text-xs text-red-500 font-semibold">
+                  {t('practice.modal.howToPractice')}
+                </span>
+                <div className="">
                   <label
                     htmlFor="practice"
                     className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">

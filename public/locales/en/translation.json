@@ -16,6 +16,7 @@
     "setupButton": "Define Practice Setting",
     "modal": {
       "title": "Set up practice settings",
+      "howToPractice": "Write down without looking at the screen. If there is a character you can't remember, skip it and listen to the next character. Then, mark that character as difficult and practice again and again.",
       "typeOfPractice": "Specify type of practice",
       "all": "All",
       "favorites": "Favorites",
