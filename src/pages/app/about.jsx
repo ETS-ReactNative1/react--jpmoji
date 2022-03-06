@@ -28,26 +28,15 @@ const About = () => {
         <small className="text-indigo-500 mt-5 inline-block">
           made with{' '}
           <svg
-            version="1.0"
             xmlns="http://www.w3.org/2000/svg"
-            width="13pt"
-            height="13pt"
-            className="inline"
-            viewBox="0 0 512.000000 512.000000"
-            preserveAspectRatio="xMidYMid meet">
-            <g
-              transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-              fill="#f00"
-              stroke="none">
-              <path
-                d="M1435 4349 c-515 -47 -925 -432 -1032 -967 -24 -122 -24 -368 0 -480
-108 -499 511 -1026 1216 -1587 287 -228 672 -490 767 -521 83 -27 265 -27 349
-0 70 23 363 216 605 397 800 602 1261 1175 1377 1712 24 111 24 358 0 479
--108 540 -519 922 -1042 967 -359 31 -713 -111 -985 -395 -42 -44 -88 -95
--103 -114 l-27 -35 -27 35 c-54 69 -190 203 -263 259 -251 192 -538 278 -835
-250z"
-              />
-            </g>
+            className="h-5 w-5 inline"
+            viewBox="0 0 20 20"
+            fill="#f00">
+            <path
+              fillRule="evenodd"
+              d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+              clipRule="evenodd"
+            />
           </svg>{' '}
           by mr.htetphyonaing@gmail.com
         </small>
