@@ -18,7 +18,7 @@ const About = () => {
           See Version 1 @ https://hpn-katakana.netlify.app
         </a>
         <a
-          href="https://hpn-katakana.netlify.app"
+          href="https://hpn-hiragana.netlify.app"
           className="font-medium text-gray-500 block">
           See Version 1 @ https://hpn-hiragana.netlify.app
         </a>
