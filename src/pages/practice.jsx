@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
-import { playAudioWave } from '../utils/playAudio';
+import { playAudio, playAudioWave } from '../utils/playAudio';
 import skipCharacter from '../assets/skip-character.png';
 import CustomRadioButton from '../components/customRadioButton';
 
@@ -73,11 +73,12 @@ const Practice = ({ selectedCharacter }) => {
     shuffled = ['started', ...shuffled, 'finished'];
     setShuffledItems(shuffled);
 
-    shuffled.forEach((name, index) =>
+    shuffled.forEach((name, index) => {
       setTimeout(() => {
-        playAudioWave(name);
-      }, delay * index * 1000)
-    );
+        if (name === 'started' || name === 'finished') playAudio(name);
+        else playAudioWave(name);
+      }, delay * index * 1000);
+    });
   };
 
   const handlePracticeTypeSelect = (value) => setPracticeType(value);
