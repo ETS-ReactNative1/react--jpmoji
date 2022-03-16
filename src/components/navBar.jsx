@@ -115,7 +115,7 @@ const NavBar = ({
                     paddingBottom: 0.5,
                     marginTop: 0.2,
                   }}>
-                  ヵ
+                  ka
                 </ToggleButton>
                 <ToggleButton
                   value="hi"
@@ -125,7 +125,7 @@ const NavBar = ({
                     paddingBottom: 0.5,
                     marginTop: 0.2,
                   }}>
-                  ひ
+                  hi
                 </ToggleButton>
               </ToggleButtonGroup>
             </li>
