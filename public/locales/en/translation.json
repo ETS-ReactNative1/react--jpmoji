@@ -30,7 +30,7 @@
     }
   },
   "about": {
-    "text": "This app is a combined version of the above 2 sites. \n\n It is developed with the aim of helping students who have started learning Japanese Language and find difficult in remembering characters. \n\n You can learn how a character is correctly drawn and how it is pronounced on `Learn` page, able to mark characters difficult, and can practice those characters randomly in `Practice` Page. Choose a practice type, set delay and write down what you hear and then check if they are correct when the audio has finished."
+    "text": "This app is a combined version of the above 2 sites. \n\n It is developed with the aim of helping students who have started learning Japanese Language and find difficult in remembering characters. \n\n There are mainly 2 types of characters in Japanese Language called Katakana and Hiragana. If you want to learn and practice Katakana, click `KA`. Otherwise, if you want to go for Hiragana, click `HI`. (You can see those buttons in navigation bar)  \n\n You can learn how a character is correctly drawn and how it is pronounced on `Learn` page, able to mark characters difficult, and can practice those characters randomly in `Practice` Page. Choose a practice type, set delay and write down what you hear and then check if they are correct when the audio has finished."
   },
   "notFound": {
     "text": "Our apologies, but we couldn't find that page. Is it possible that you found a bad link?",
