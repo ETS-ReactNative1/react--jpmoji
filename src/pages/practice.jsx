@@ -69,7 +69,8 @@ const Practice = ({ selectedCharacter }) => {
   };
 
   const shaffleAndPlay = (arr) => {
-    const shuffled = _.shuffle(arr);
+    let shuffled = _.shuffle(arr);
+    shuffled = ['started', ...shuffled, 'finished'];
     setShuffledItems(shuffled);
 
     shuffled.forEach((name, index) =>
@@ -146,6 +147,8 @@ const Practice = ({ selectedCharacter }) => {
         <div className="w-full mt-3" style={{ zIndex: 99 }}>
           {shuffledItems &&
             shuffledItems.map((item, index) => {
+              if (item === 'started' || item === 'finished') return null;
+
               return (
                 <React.Fragment key={item}>
                   <figure className="border-4 m-1 rounded-lg border-indigo-200 inline-block p-2 w-12 lg:w-14">
