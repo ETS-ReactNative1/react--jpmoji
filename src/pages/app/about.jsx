@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
+import thumbnail from '../../assets/thumbnail.png';
 
 const About = () => {
   useTitle('Momoji | About');
@@ -24,6 +25,9 @@ const About = () => {
           className="font-medium text-sm ml-0 md:ml-3 hover:underline text-gray-500 hover:text-indigo-500 block md:inline-block">
           See Hiragana (V.1)
         </a>
+
+        <img className="object-cover mt-3" src={thumbnail} />
+
         <div className="mt-5">{t('about.text')}</div>
         <small className="text-indigo-500 mt-5 inline-block">
           made with{' '}
